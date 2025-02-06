@@ -32,6 +32,9 @@
     <script>
         document.getElementById("contractForm").addEventListener("submit", function(event) {
             event.preventDefault();
+
+            const scriptURL = "https://script.google.com/macros/s/AKfycbzdX22nrMUJlsUdsdLEK-mP3H9DhRBF4Xyhlb7pf8X1xqlgwqAM6V2MfcIROFSM_jyb/exec"; 
+
             
             // 폼 데이터 가져오기
             const formData = new FormData(event.target);
