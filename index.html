@@ -3,19 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>내 첫 GitHub Pages 웹사이트</title>
-</head>
-<body>
-    <h1>안녕하세요! 🎉</h1>
-    <p>GitHub Pages를 이용해 만든 무료 웹사이트입니다.</p>
-</body>
-</html>
-
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>계약 정보 입력</title>
 </head>
 <body>
@@ -33,15 +20,12 @@
         document.getElementById("contractForm").addEventListener("submit", function(event) {
             event.preventDefault();
 
+            // ✅ Google Apps Script 웹 앱 URL (배포된 URL 사용)
             const scriptURL = "https://script.google.com/macros/s/AKfycbzdX22nrMUJlsUdsdLEK-mP3H9DhRBF4Xyhlb7pf8X1xqlgwqAM6V2MfcIROFSM_jyb/exec"; 
 
-            
             // 폼 데이터 가져오기
             const formData = new FormData(event.target);
             const data = Object.fromEntries(formData.entries());
-
-            // Google Apps Script URL (아래에서 생성)
-            const scriptURL = "YOUR_GOOGLE_SCRIPT_URL_HERE"; 
 
             fetch(scriptURL, { 
                 method: "POST",
@@ -50,7 +34,7 @@
             })
             .then(response => response.text())
             .then(data => {
-                alert("제출 완료!");
+                alert("제출 완료! Google Sheets에 저장되었습니다.");
                 event.target.reset();
             })
             .catch(error => console.error("Error!", error));
