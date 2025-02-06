@@ -20,27 +20,30 @@
         document.getElementById("contractForm").addEventListener("submit", function(event) {
             event.preventDefault();
 
-            // ✅ Google Apps Script 웹 앱 URL (배포된 URL 사용)
-            const scriptURL = "https://script.google.com/macros/s/AKfycbyZF_3YFUDYR6GW-xDXZ3myTCHQLopfT5jY9kamYE0hvHvRz_X5efrALDCwuMRjm7cC4A/exec"; 
+            const scriptURL = "https://script.google.com/macros/s/AKfycbzdX22nrMUJlsUdsdLEK-mP3H9DhRBF4Xyhlb7pf8X1xqlgwqAM6V2MfcIROFSM_jyb/exec"; 
 
             // 폼 데이터 가져오기
             const formData = new FormData(event.target);
-            const data = Object.fromEntries(formData.entries());
+            const data = Object.fromEntries(formData.entries());  // FormData를 객체로 변환
 
-fetch(scriptURL, { 
-    method: "POST",
-    body: JSON.stringify(data),
-    headers: { "Content-Type": "application/json" }
-})
-.then(response => {
-    console.log("서버 응답:", response);
-    alert("제출 완료!");
-    event.target.reset();
-})
-.catch(error => {
-    console.error("Error!", error);
-    alert("오류 발생! 콘솔을 확인하세요.");
-});
+            // Google Apps Script URL로 POST 요청
+            fetch(scriptURL, { 
+                method: "POST",  // HTTP POST 요청
+                body: JSON.stringify(data),  // 폼 데이터를 JSON 형식으로 변환
+                headers: { "Content-Type": "application/json" }  // 요청 헤더 설정 (JSON)
+            })
+            .then(response => {
+                if (response.ok) {  // 응답이 정상적인지 확인
+                    alert("제출 완료!");  // 응답이 정상적이면 알림
+                    event.target.reset();  // 폼 리셋
+                } else {
+                    alert("서버 응답 오류!");  // 오류가 있을 경우 알림
+                }
+            })
+            .catch(error => {
+                console.error("Error!", error);  // 콘솔에서 에러 출력
+                alert("오류 발생! 콘솔을 확인하세요.");
+            });
         });
     </script>
 </body>
